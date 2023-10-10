@@ -56,3 +56,4 @@ CREATE TABLE IF NOT EXISTS Cliente_Artista(
 );
 
 ALTER TABLE Pintura ADD CONSTRAINT fk_idArtista  foreign key (idArtista) references Artista(idArtista);
+
