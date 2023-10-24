@@ -57,3 +57,22 @@ CREATE TABLE IF NOT EXISTS Cliente_Artista(
 
 ALTER TABLE Pintura ADD CONSTRAINT fk_idArtista  foreign key (idArtista) references Artista(idArtista);
 
+
+USE EjArtistas;
+SELECT art.nombre,art.apellido,COUNT(idPintura) FROM Pintura AS pin, Artista as art WHERE pin.idArtista = art.idArtista
+GROUP BY art.idArtista;
+
+SELECT cli.nombre, cli.apellido, COUNT(idTransaccion) as Cantidad, SUM(tran.precio) as Subtotal,
+       AVG(tran.precio) as Total FROM Transaccion AS tran, Cliente as cli
+        WHERE cli.idCliente = tran.idCliente GROUP BY cli.idCliente HAVING Cantidad > 1;
+
+
+SELECT ar.nombre, ar.apellido , COUNT(pin.idPintura) AS CUANTOS,SUM(precio) AS PRECIO FROM Pintura AS pin ,Artista AS ar,
+                                                     Transaccion AS tran
+                                                     WHERE pin.idPintura = tran.idPintura AND pin.idPintura = tran.idPintura
+                                                     AND precio<10000
+                                                     GROUP BY ar.idArtista HAVING SUM(tran.precio) < 1000;
+
+SELECT PIN.titulo, COUNT(TRAN.idTransaccion) AS TOTAL_VENTAS FROM Pintura AS PIN, Transaccion AS TRAN
+                                                             WHERE PIN.idPintura = TRAN.idPintura
+                                                             GROUP BY PIN.idPintura HAVING TOTAL_VENTAS >= 2;
