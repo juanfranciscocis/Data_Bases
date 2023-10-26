@@ -21,3 +21,19 @@ SELECT CONCAT(emp.firstName,' ',emp.lastName) as fullName, off.city,off.country 
 SELECT emp.firstName, emp.lastName, AVG(odd.priceEach) as promedio FROM employees as emp, customers as cli, orderdetails
     as odd, orders as ord , customers as cus where odd.orderNumber=ord.orderNumber and ord.customerNumber=cus.customerNumber
     and cus.salesRepEmployeeNumber=emp.employeeNumber GROUP BY emp.employeeNumber HAVING promedio > 90;
+
+
+SELECT pro.productCode FROM products as pro where pro.buyPrice > 40 and pro.buyPrice <100;
+
+
+CREATE VIEW clientesComprasEntre40y100 AS
+SELECT customerName FROM customers WHERE customerNumber in(
+SELECT customerNumber from orders where orderNumber in(
+SELECT orderNumber FROM orderdetails WHERE productCode in(SELECT pro.productCode FROM products as pro
+                                                        where pro.buyPrice > 40 and pro.buyPrice <100)));
+
+
+
+
+
+
