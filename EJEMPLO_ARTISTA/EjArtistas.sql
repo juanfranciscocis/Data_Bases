@@ -76,3 +76,25 @@ SELECT ar.nombre, ar.apellido , COUNT(pin.idPintura) AS CUANTOS,SUM(precio) AS P
 SELECT PIN.titulo, COUNT(TRAN.idTransaccion) AS TOTAL_VENTAS FROM Pintura AS PIN, Transaccion AS TRAN
                                                              WHERE PIN.idPintura = TRAN.idPintura
                                                              GROUP BY PIN.idPintura HAVING TOTAL_VENTAS >= 2;
+
+
+
+USE EjArtistas;
+SELECT titulo,nombre, apellido from Pintura inner join Artista on Pintura.idPintura = Artista.idArtista
+                               inner join Transaccion on Pintura.idPintura = Transaccion.idPintura where Transaccion.precio > 500
+                                and Artista.nombre = 'David';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
